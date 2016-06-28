@@ -13,7 +13,7 @@ Developer -
 	2. Have images be randomly generated in a row of 3
 	3. Stop survey after 25 clicks.
 	4. Offer chance to view data to user
-	5. Make it look good.
+	5. Mvake it look good.
 	
 User - 
 	1. Feedback at end
