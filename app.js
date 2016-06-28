@@ -8,10 +8,21 @@ function Product(name, path) {
 };
 
 var itemArray = [];
+var left = document.getElementById('left');
+var middle = document.getElementById('middle');
+var right = document.getElementById('right');
+var currentNums = [];
+var tally = [];
+var name = [];
+
+// function updateChartArray() {
+//   for (var i = 0; i < ; i++)
+//
+// };
 
 function getRandomIntInclusive() {
-  return Math.floor(Math.random() * (itemArray.length) - 1);
-}
+  return Math.floor(Math.random() * (itemArray.length));
+};
 
 function callProducts() {
   itemArray.push(new Product('bag', 'images/bag.jpg'));
@@ -40,31 +51,49 @@ console.log(itemArray);
 
 function randomThreeNum() {
   var one = getRandomIntInclusive();
+  while(one === currentNums[0] || one === currentNums[1] || one === currentNums[2]) {
+    one = getRandomIntInclusive();
+    console.log('one matched a prior image');
+  }
   var two = getRandomIntInclusive();
+  while(two === currentNums[0] || two === currentNums[1] || two === currentNums[2]) {
+    two = getRandomIntInclusive();
+    console.log('two matched a prior image');
+  }
   var three = getRandomIntInclusive();
+  while(three === currentNums[0] || three === currentNums[1] || three === currentNums[2]) {
+    three = getRandomIntInclusive();
+    console.log('three matched a prior image');
+  }
+
   while (one === three || one === two || two === three){
     console.log('dupe');
     if (one === two) {
-      two = itemArray[getRandomIntInclusive()].path;
+      two = getRandomIntInclusive();
     };
     if (three === two || three === one) {
-      three = itemArray[getRandomIntInclusive()].path;
+      three = getRandomIntInclusive();
       console.log('duplicate image prevented');
     };
   };
-  return [one, two, three];
+  currentNums = [one, two, three];
+  // console.log(currentNums);
+  return currentNums;
 };
 
 function makeImages() {
   var threeNums = randomThreeNum();
-  var left = document.getElementById('left');
   left.src = itemArray[threeNums[0]].path;
+  left.alt = itemArray[threeNums[0]].name;
+  itemArray[threeNums[0]].tally += 1;
   console.log(threeNums[0]);
-  var middle = document.getElementById('middle');
   middle.src = itemArray[threeNums[1]].path;
+  middle.alt = itemArray[threeNums[1]].name;
+  itemArray[threeNums[1]].tally += 1;
   console.log(threeNums[1]);
-  var right = document.getElementById('right');
   right.src = itemArray[threeNums[2]].path;
+  right.alt = itemArray[threeNums[2]].name;
+  itemArray[threeNums[2]].tally += 1;
   console.log(threeNums[2]);
 };
 makeImages();
@@ -75,8 +104,8 @@ theContainer.addEventListener('click', handleContainer);
 var click = 0;
 
 function handleContainer(event){
-  console.log(event.target.id);
-  if (event.target.id === 'container') {
+  console.log(event.target.alt);
+  if (event.target.alt === 'container') {
     alert('You cannot follow instructions to click directly on a contained element. Please do so!');
   } else if (click < 25) {
     click++;
@@ -85,4 +114,10 @@ function handleContainer(event){
   } else if (click = 25) {
     theContainer.removeEventListener('click', handleContainer);
   }
+  for(var i = 0; i < itemArray.length; i++) {
+    if(event.target.alt === itemArray[i].name)
+      itemArray[i].click += 1;
+    // console.log(itemArray[i].name + ' has ' + itemArray[i].clicks + ' clicks.');
+  }
+  makeImages();
 }
