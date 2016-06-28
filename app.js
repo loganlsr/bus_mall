@@ -77,7 +77,7 @@ var click = 0;
 function handleContainer(event){
   console.log(event.target.id);
   if (event.target.id === 'container') {
-    alert('You cannot follow instructions to click directly on a contained element. Your clicking privileges will be revoked. Have a nice day.');
+    alert('You cannot follow instructions to click directly on a contained element. Please do so!');
   } else if (click < 25) {
     click++;
     console.log(click);
