@@ -12,9 +12,7 @@ var left = document.getElementById('left');
 var middle = document.getElementById('middle');
 var right = document.getElementById('right');
 var currentNums = [];
-var tally = [];
-var name = [];
-
+document.getElementById('button').hidden = true;
 // function updateChartArray() {
 //   for (var i = 0; i < ; i++)
 //
@@ -51,31 +49,21 @@ console.log(itemArray);
 
 function randomThreeNum() {
   var one = getRandomIntInclusive();
-  while(one === currentNums[0] || one === currentNums[1] || one === currentNums[2]) {
-    one = getRandomIntInclusive();
-    console.log('one matched a prior image');
-  }
   var two = getRandomIntInclusive();
-  while(two === currentNums[0] || two === currentNums[1] || two === currentNums[2]) {
-    two = getRandomIntInclusive();
-    console.log('two matched a prior image');
-  }
   var three = getRandomIntInclusive();
-  while(three === currentNums[0] || three === currentNums[1] || three === currentNums[2]) {
-    three = getRandomIntInclusive();
-    console.log('three matched a prior image');
+  console.log(currentNums);
+  while (one === currentNums[0] || one === currentNums[1] || one === currentNums[2]) {
+    one = getRandomIntInclusive();
+    console.log('one hit previous');
   }
-
-  while (one === three || one === two || two === three){
-    console.log('dupe');
-    if (one === two) {
-      two = getRandomIntInclusive();
-    };
-    if (three === two || three === one) {
-      three = getRandomIntInclusive();
-      console.log('duplicate image prevented');
-    };
-  };
+  while (two === currentNums[0] || two === currentNums[1] || two === currentNums[2] || one === two) {
+    two = getRandomIntInclusive();
+    console.log('two hit previous');
+  }
+  while (three === currentNums[0] || three === currentNums[1] || three === currentNums[2] || one === three || two === three) {
+    three = getRandomIntInclusive();
+    console.log('three hit previous');
+  }
   currentNums = [one, two, three];
   // console.log(currentNums);
   return currentNums;
@@ -113,11 +101,52 @@ function handleContainer(event){
     makeImages();
   } else if (click = 25) {
     theContainer.removeEventListener('click', handleContainer);
+    showChart();
   }
   for(var i = 0; i < itemArray.length; i++) {
     if(event.target.alt === itemArray[i].name)
       itemArray[i].click += 1;
     // console.log(itemArray[i].name + ' has ' + itemArray[i].clicks + ' clicks.');
   }
-  makeImages();
+};
+
+function showChart() {
+  document.getElementById('button').hidden = false;
 }
+
+function displayTable(event) {
+  var barData = {
+    labels : names(),
+    datasets : [
+      {
+        fillColor : '#48A497',
+        strokeColor : '#48A4D1',
+        data : tableData(),
+      },
+    ]
+  };
+  var barGraph = document.getElementById('barGraph').getContext('2d');
+  new Chart.Bar(barGraph, {
+    data: barData,
+  });
+}
+
+var theButton = document.getElementById('button');
+theButton.addEventListener('click', displayTable);
+
+
+var names = function() {
+  var labels = [];
+  for(var i = 0; i < itemArray.length; i++) {
+    labels[i] = itemArray[i].name;
+  }
+  return labels;
+};
+
+var tableData = function() {
+  var data = [];
+  for(var i = 0; i < itemArray.length; i++) {
+    data[i] = itemArray[i].click;
+  }
+  return data;
+};
