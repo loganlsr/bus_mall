@@ -133,7 +133,6 @@ function displayTable(event) {
 var theButton = document.getElementById('button');
 theButton.addEventListener('click', displayTable);
 
-
 var names = function() {
   var labels = [];
   for(var i = 0; i < itemArray.length; i++) {
