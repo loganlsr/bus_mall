@@ -119,8 +119,7 @@ function displayTable(event) {
     labels : names(),
     datasets : [
       {
-        fillColor : '#48A497',
-        strokeColor : '#48A4D1',
+        backgroundColor: '#48A497',
         data : tableData(),
       },
     ]
