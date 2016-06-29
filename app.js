@@ -12,6 +12,7 @@ var left = document.getElementById('left');
 var middle = document.getElementById('middle');
 var right = document.getElementById('right');
 var currentNums = [];
+var click = 0;
 document.getElementById('button').hidden = true;
 // function updateChartArray() {
 //   for (var i = 0; i < ; i++)
@@ -86,11 +87,6 @@ function makeImages() {
 };
 makeImages();
 
-var theContainer = document.getElementById('container');
-theContainer.addEventListener('click', handleContainer);
-
-var click = 0;
-
 function handleContainer(event){
   console.log(event.target.alt);
   if (event.target.alt === 'container') {
@@ -130,9 +126,6 @@ function displayTable(event) {
   });
 }
 
-var theButton = document.getElementById('button');
-theButton.addEventListener('click', displayTable);
-
 var names = function() {
   var labels = [];
   for(var i = 0; i < itemArray.length; i++) {
@@ -148,3 +141,9 @@ var tableData = function() {
   }
   return data;
 };
+
+var theButton = document.getElementById('button');
+theButton.addEventListener('click', displayTable);
+
+var theContainer = document.getElementById('container');
+theContainer.addEventListener('click', handleContainer);
