@@ -112,8 +112,14 @@ img {
 	margin: 0	auto;
 	padding-left: 30px;
 	padding-right: 30px;
+	cursor: pointer;
 }
 
 button {
 	margin-left: 50px;
+	cursor: pointer;
+}
+
+canvas {
+	cursor: pointer;
 }
