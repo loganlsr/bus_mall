@@ -100,10 +100,10 @@ section{
 	/*padding-right: 30px;*/
 }
 
-section div {
-	display: inline;
+.images {
 	width: 100%;
 	margin: 0 auto;
+	text-align: center;
 }
 
 img {
@@ -116,10 +116,28 @@ img {
 }
 
 button {
-	margin-left: 50px;
+	border: none;
+	width: 200px;
+	height: 50px;
+	border-radius: 5px;
+	background-color: #fff;
+	color: #111;
 	cursor: pointer;
+	margin-bottom: 50px;
+	text-align: center;
+}
+
+section .button {
+	width: 100%;
+	margin: 0 auto;
 }
 
 canvas {
 	cursor: pointer;
+	display: none;
+}
+
+.button {
+	position: relative;
+	text-align: center;
 }
