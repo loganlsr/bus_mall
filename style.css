@@ -109,9 +109,7 @@ section{
 img {
 	width: 250px;
 	height: 250px;
-	margin: 0	auto;
-	padding-left: 30px;
-	padding-right: 30px;
+	margin: 0	30px;
 	cursor: pointer;
 }
 
