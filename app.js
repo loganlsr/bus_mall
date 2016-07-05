@@ -105,7 +105,17 @@ function displayTable(event) {
       {
         label : 'Number of Times Item Selected',
         backgroundColor: '#48A497',
-        data : tableData(),
+        data : tableDataClicks(),
+      },
+      {
+        label : 'Number of Times Item Viewed',
+        backgroundColor: '#38D415',
+        data : tableDataViews(),
+      },
+      {
+        label : 'Click Through Percentage',
+        backgroundColor: '#D41445',
+        data : clickThrough(),
       },
     ]
   };
@@ -134,10 +144,26 @@ var names = function() {
   return labels;
 };
 
-var tableData = function() {
+var tableDataClicks = function() {
   var data = [];
   for(var i = 0; i < itemArray.length; i++) {
     data[i] = itemArray[i].click;
+  }
+  return data;
+};
+
+var tableDataViews = function() {
+  var data = [];
+  for(var i = 0; i < itemArray.length; i++) {
+    data[i] = itemArray[i].tally;
+  }
+  return data;
+};
+
+var clickThrough = function() {
+  var data = [];
+  for(var i = 0; i < itemArray.length; i++) {
+    data[i] = (itemArray[i].click / itemArray[i].tally) * 100;
   }
   return data;
 };
